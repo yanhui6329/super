@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './stylesheets/Apps.scss';
+import './stylesheets/index.scss';
 import {Route,Switch,Redirect,withRouter} from 'react-router-dom';
 import {Home,List,Mine,Cars,NotFound} from './components/pages/index';
 import NavBar from './components/commons/NavBar'
@@ -17,12 +17,15 @@ class App extends Component {
   	}
   }
   render() {
+    let { routes } = this.props
     return (
       <div className="App">
       <Switch>
-        {
-          this.props.routes.map(item=>(<Route exact = {item.exact} path={item.parth} key = {item.id} component = {item.component}/> ))
-        }
+      {
+        routes.map(item => {
+          return <Route exact = {item.exact}  path={item.path} component = {item.component}  key = { item.id }/>
+        })
+	    }
         <Redirect to='/not-found'/>
       </Switch>
       {this.renderFooter()}
